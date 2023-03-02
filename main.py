@@ -24,6 +24,7 @@ while is_working:
     if ball_rect.bottom >= height or ball_rect.top <= 0:
         ball_speed[1] = -ball_speed[1]
         ball.fill((random.randrange(256), random.randrange(256), random.randrange(256)))
+
     if ball_rect.left >= width or ball_rect.right <= 0:
         ball_speed[0] = -ball_speed[0]
         ball.fill((random.randrange(256), random.randrange(256), random.randrange(256)))
