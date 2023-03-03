@@ -5,7 +5,7 @@ import pygame
 from pygame.constants import QUIT
 
 pygame.init()
-screen = width, height = 1800, 800
+screen = width, height = 1200, 400
 BLACK = 0, 0, 0
 WHITE = 255, 255, 255
 COLOR = ((255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (255, 255, 255), (0, 255, 255))
