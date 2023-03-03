@@ -81,7 +81,6 @@ while is_working:
             bonuses.remove(bonus)
         if ball_rect.colliderect(bonus[1]):
             bonuses.remove(bonus)
-        print(len(bonuses))
 
     if pressed_keys[K_DOWN] and not ball_rect.bottom >= height:
         ball_rect = ball_rect.move((0, ball_speed))
