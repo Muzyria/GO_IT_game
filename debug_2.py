@@ -5,7 +5,7 @@ import pygame
 from pygame.constants import QUIT
 
 pygame.init()
-screen = width, height = 1200, 400
+screen = width, height = 1200, 800
 BLACK = 0, 0, 0
 COLOR = ((255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (255, 255, 255), (0, 255, 255))
 cycle_iter_color = cycle(COLOR)
@@ -29,11 +29,11 @@ while is_working:
 
     if ball_pos[1] + ball_rect.height >= height or ball_pos[1] <= 0:
         ball_speed[1] = -ball_speed[1]
-        ball_image.fill(next(cycle_iter_color))
+        # ball_image.fill(next(cycle_iter_color))
 
     if ball_pos[0] + ball_rect.width >= width or ball_pos[0] <= 0:
         ball_speed[0] = -ball_speed[0]
-        ball_image.fill(next(cycle_iter_color))
+        # ball_image.fill(next(cycle_iter_color))
 
     main_surface.fill(BLACK)
     main_surface.blit(ball_image, ball_pos)
