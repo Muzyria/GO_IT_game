@@ -19,7 +19,7 @@ ball_speed = [1, 1]
 
 is_working = True
 while is_working:
-    time.sleep(0.002)
+    # time.sleep(0.002)
     for event in pygame.event.get():
         if event.type == QUIT:
             is_working = False
