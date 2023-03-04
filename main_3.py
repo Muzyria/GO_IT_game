@@ -34,20 +34,19 @@ bonus_img = pygame.image.load("img/bonus.png")
 def create_enemy():
     # enemy = pygame.Surface((20, 20))
     # enemy.fill(RED)
-    enemy = enemy_img
-    enemy_rect = pygame.Rect(width, random.randint(0, height), *enemy.get_size())
+    enemy_create = pygame.transform.scale(enemy_img, (enemy_img.get_width() / 2, enemy_img.get_height() / 2))
+    enemy_rect = pygame.Rect(width, random.randint(0, height), *enemy_create.get_size())
     enemy_speed = random.randint(2, 5)
-    return [enemy, enemy_rect, enemy_speed]
+    return [enemy_create, enemy_rect, enemy_speed]
 
 
 def create_bonus():
-
     # bonus = pygame.Surface((20, 20))
     # bonus.fill(GREEN)
-    bonus = bonus_img
-    bonus_rect = pygame.Rect(random.randint(0, width), 0, *bonus.get_size())
+    bonus_create = pygame.transform.scale(bonus_img, (bonus_img.get_width()/2, bonus_img.get_height()/2))
+    bonus_rect = pygame.Rect(random.randint(0, width), 0, *bonus_create.get_size())
     bonus_speed = random.randint(2, 5)
-    return [bonus, bonus_rect, bonus_speed]
+    return [bonus_create, bonus_rect, bonus_speed]
 
 
 bg = pygame.transform.scale(pygame.image.load("img/background.png").convert(), screen)
@@ -108,7 +107,7 @@ while is_working:
     for enemy in enemies:
         enemy[1] = enemy[1].move(-enemy[2], 0)
         main_surface.blit(enemy[0], enemy[1])
-        if enemy[1].left < 0:
+        if enemy[1].left < -bonus_img.get_width():
             enemies.remove(enemy)
         if player_rect.colliderect(enemy[1]):
             is_working = False
@@ -116,7 +115,7 @@ while is_working:
     for bonus in bonuses:
         bonus[1] = bonus[1].move(0, bonus[2])
         main_surface.blit(bonus[0], bonus[1])
-        if bonus[1].bottom > height:
+        if bonus[1].bottom > height + bonus_img.get_height():
             bonuses.remove(bonus)
         if player_rect.colliderect(bonus[1]):
             bonuses.remove(bonus)
