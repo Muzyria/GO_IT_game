@@ -2,6 +2,7 @@ import random
 import pygame
 from pygame.constants import QUIT, K_DOWN, K_UP, K_LEFT, K_RIGHT
 from os import listdir
+from itertools import cycle
 
 pygame.init()
 
@@ -21,7 +22,8 @@ font = pygame.font.SysFont("Verdana", 20)
 main_surface = pygame.display.set_mode(screen)
 
 player_img = [pygame.image.load(f'{IMGS_PATH}/{file}').convert_alpha() for file in listdir(IMGS_PATH)]
-player = player_img[0]
+player_iter_img_cycle = cycle(player_img)
+player = next(player_iter_img_cycle)
 player_rect = player.get_rect()
 player_speed = 5
 
@@ -80,10 +82,7 @@ while is_working:
             bonuses.append(create_bonus())
 
         if event.type == CHANGE_IMG:
-            img_index += 1
-            if img_index == len(player_img):
-                img_index = 0
-            player = player_img[img_index]
+            player = next(player_iter_img_cycle)
 
     pressed_keys = pygame.key.get_pressed()
 
@@ -104,8 +103,8 @@ while is_working:
         main_surface.blit(enemy[0], enemy[1])
         if enemy[1].left < -bonus_img.get_width():
             enemies.remove(enemy)
-        if player_rect.colliderect(enemy[1]):
-            is_working = False
+        # if player_rect.colliderect(enemy[1]):
+        #     is_working = False
 
     for bonus in bonuses:
         bonus[1] = bonus[1].move(0, bonus[2])
