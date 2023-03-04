@@ -25,20 +25,26 @@ main_surface = pygame.display.set_mode(screen)
 player_img = [pygame.image.load(f'{IMGS_PATH}/{file}').convert_alpha() for file in listdir(IMGS_PATH)]
 player = player_img[0]
 player_rect = player.get_rect()
-ball_speed = 5
+player_speed = 5
+
+enemy_img = pygame.image.load("img/enemy.png")
+bonus_img = pygame.image.load("img/bonus.png")
 
 
 def create_enemy():
-    enemy = pygame.Surface((20, 20))
-    enemy.fill(RED)
+    # enemy = pygame.Surface((20, 20))
+    # enemy.fill(RED)
+    enemy = enemy_img
     enemy_rect = pygame.Rect(width, random.randint(0, height), *enemy.get_size())
     enemy_speed = random.randint(2, 5)
     return [enemy, enemy_rect, enemy_speed]
 
 
 def create_bonus():
-    bonus = pygame.Surface((20, 20))
-    bonus.fill(GREEN)
+
+    # bonus = pygame.Surface((20, 20))
+    # bonus.fill(GREEN)
+    bonus = bonus_img
     bonus_rect = pygame.Rect(random.randint(0, width), 0, *bonus.get_size())
     bonus_speed = random.randint(2, 5)
     return [bonus, bonus_rect, bonus_speed]
@@ -97,7 +103,7 @@ while is_working:
     main_surface.blit(bg, (bgx2, 0))
 
     main_surface.blit(player, player_rect)
-    main_surface.blit(font.render(str(scores), True, WHITE), (width - 30, 0))
+    main_surface.blit(font.render(str(scores), True, BLACK), (width - 30, 0))
 
     for enemy in enemies:
         enemy[1] = enemy[1].move(-enemy[2], 0)
@@ -117,13 +123,13 @@ while is_working:
             scores += 1
 
     if pressed_keys[K_DOWN] and not player_rect.bottom >= height:
-        player_rect = player_rect.move((0, ball_speed))
+        player_rect = player_rect.move((0, player_speed))
     if pressed_keys[K_UP] and not player_rect.top <= 0:
-        player_rect = player_rect.move((0, -ball_speed))
+        player_rect = player_rect.move((0, -player_speed))
     if pressed_keys[K_RIGHT] and not player_rect.right >= width:
-        player_rect = player_rect.move((ball_speed, 0))
+        player_rect = player_rect.move((player_speed, 0))
     if pressed_keys[K_LEFT] and not player_rect.left <= 0:
-        player_rect = player_rect.move((-ball_speed, 0))
+        player_rect = player_rect.move((-player_speed, 0))
 
     # main_surface.fill((155, 155, 155))
     pygame.display.flip()
