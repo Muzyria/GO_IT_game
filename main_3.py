@@ -103,8 +103,8 @@ while is_working:
         main_surface.blit(enemy[0], enemy[1])
         if enemy[1].left < -bonus_img.get_width():
             enemies.remove(enemy)
-        # if player_rect.colliderect(enemy[1]):
-        #     is_working = False
+        if player_rect.colliderect(enemy[1]):
+            is_working = False
 
     for bonus in bonuses:
         bonus[1] = bonus[1].move(0, bonus[2])
