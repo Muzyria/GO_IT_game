@@ -13,11 +13,14 @@ WHITE = 255, 255, 255
 RED = 255, 0, 0
 GREEN = 0, 255, 0
 
+font = pygame.font.SysFont("Verdana", 20)
+
 main_surface = pygame.display.set_mode(screen)
 
-ball = pygame.Surface((20, 20))
-ball.fill(WHITE)
-ball_rect = ball.get_rect()
+# player = pygame.Surface((20, 20))
+# player.fill(WHITE)
+player = pygame.image.load("img/player.png").convert_alpha()
+player_rect = player.get_rect()
 ball_speed = 5
 
 
@@ -37,10 +40,17 @@ def create_bonus():
     return [bonus, bonus_rect, bonus_speed]
 
 
+bg = pygame.transform.scale(pygame.image.load("img/background.png").convert(), screen)
+bgx = 0
+bgx2 = bg.get_width()
+bg_speed = 3
+
 CREATE_ENEMY = pygame.USEREVENT + 1
 pygame.time.set_timer(CREATE_ENEMY, 1500)
 CREATE_BONUS = pygame.USEREVENT + 2
 pygame.time.set_timer(CREATE_BONUS, 2500)
+
+scores = 0
 
 bonuses = []
 enemies = []
@@ -61,33 +71,45 @@ while is_working:
             bonuses.append(create_bonus())
 
     pressed_keys = pygame.key.get_pressed()
-    main_surface.fill(BLACK)
-    main_surface.blit(ball, ball_rect)
+    # main_surface.fill(WHITE)
+    # main_surface.blit(bg, (0, 0))
+    bgx -= bg_speed
+    bgx2 -= bg_speed
+    if bgx < -bg.get_width():
+        bgx = bg.get_width()
+    if bgx2 < -bg.get_width():
+        bgx2 = bg.get_width()
+    main_surface.blit(bg, (bgx, 0))
+    main_surface.blit(bg, (bgx2, 0))
+
+    main_surface.blit(player, player_rect)
+    main_surface.blit(font.render(str(scores), True, WHITE), (width - 30, 0))
 
     for enemy in enemies:
         enemy[1] = enemy[1].move(-enemy[2], 0)
         main_surface.blit(enemy[0], enemy[1])
         if enemy[1].left < 0:
             enemies.remove(enemy)
-        if ball_rect.colliderect(enemy[1]):
-            enemies.remove(enemy)
+        if player_rect.colliderect(enemy[1]):
+            is_working = False
 
     for bonus in bonuses:
         bonus[1] = bonus[1].move(0, bonus[2])
         main_surface.blit(bonus[0], bonus[1])
         if bonus[1].bottom > height:
             bonuses.remove(bonus)
-        if ball_rect.colliderect(bonus[1]):
+        if player_rect.colliderect(bonus[1]):
             bonuses.remove(bonus)
+            scores += 1
 
-    if pressed_keys[K_DOWN] and not ball_rect.bottom >= height:
-        ball_rect = ball_rect.move((0, ball_speed))
-    if pressed_keys[K_UP] and not ball_rect.top <= 0:
-        ball_rect = ball_rect.move((0, -ball_speed))
-    if pressed_keys[K_RIGHT] and not ball_rect.right >= width:
-        ball_rect = ball_rect.move((ball_speed, 0))
-    if pressed_keys[K_LEFT] and not ball_rect.left <= 0:
-        ball_rect = ball_rect.move((-ball_speed, 0))
+    if pressed_keys[K_DOWN] and not player_rect.bottom >= height:
+        player_rect = player_rect.move((0, ball_speed))
+    if pressed_keys[K_UP] and not player_rect.top <= 0:
+        player_rect = player_rect.move((0, -ball_speed))
+    if pressed_keys[K_RIGHT] and not player_rect.right >= width:
+        player_rect = player_rect.move((ball_speed, 0))
+    if pressed_keys[K_LEFT] and not player_rect.left <= 0:
+        player_rect = player_rect.move((-ball_speed, 0))
 
     # main_surface.fill((155, 155, 155))
     pygame.display.flip()
