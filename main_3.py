@@ -27,8 +27,8 @@ player = next(player_iter_img_cycle)
 player_rect = player.get_rect()
 player_speed = 5
 
-enemy_img = pygame.image.load("img/enemy.png")
-bonus_img = pygame.image.load("img/bonus.png")
+enemy_img = pygame.image.load("img/enemy.png").convert_alpha()
+bonus_img = pygame.image.load("img/bonus.png").convert_alpha()
 
 
 def create_enemy():
