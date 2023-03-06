@@ -8,7 +8,7 @@ pygame.init()
 
 FPS = pygame.time.Clock()
 
-screen = width, height = 1200, 700
+screen = width, height = 1200, 800
 
 BLACK = 0, 0, 0
 WHITE = 255, 255, 255
@@ -17,7 +17,7 @@ GREEN = 0, 255, 0
 
 IMGS_PATH = "img/player_img"
 
-font = pygame.font.SysFont("Verdana", 20)
+font = pygame.font.SysFont("Verdana", 30)
 
 main_surface = pygame.display.set_mode(screen)
 
@@ -54,7 +54,7 @@ bg_speed = 3
 CREATE_ENEMY = pygame.USEREVENT + 1
 pygame.time.set_timer(CREATE_ENEMY, 1500)
 CREATE_BONUS = pygame.USEREVENT + 2
-pygame.time.set_timer(CREATE_BONUS, 3000)
+pygame.time.set_timer(CREATE_BONUS, 4000)
 # CHANGE_IMG = pygame.USEREVENT + 3
 # pygame.time.set_timer(CHANGE_IMG, 125)
 
@@ -123,5 +123,4 @@ while is_working:
     if pressed_keys[K_LEFT] and not player_rect.left <= 0:
         player_rect = player_rect.move((-player_speed, 0))
 
-    # main_surface.fill((155, 155, 155))
     pygame.display.flip()
