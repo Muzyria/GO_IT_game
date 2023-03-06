@@ -8,7 +8,7 @@ pygame.init()
 
 FPS = pygame.time.Clock()
 
-screen = width, height = 1200, 800
+screen = width, height = 800, 600
 
 BLACK = 0, 0, 0
 WHITE = 255, 255, 255
@@ -31,8 +31,8 @@ bonus_img = pygame.image.load("img/bonus_2.png").convert_alpha()
 
 
 def create_enemy():
-    # enemy_create = pygame.transform.scale(enemy_img, (enemy_img.get_width() / 2, enemy_img.get_height() / 2))
-    enemy_create = enemy_img
+    enemy_create = pygame.transform.scale(enemy_img, (enemy_img.get_width() / 2, enemy_img.get_height() / 2))
+    # enemy_create = enemy_img
     enemy_rect = pygame.Rect(width, random.randint(0, height - enemy_img.get_height()), *enemy_create.get_size())
     enemy_speed = random.randint(2, 5)
     return [enemy_create, enemy_rect, enemy_speed]

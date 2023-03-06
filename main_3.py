@@ -17,7 +17,7 @@ GREEN = 0, 255, 0
 
 IMGS_PATH = "img/player_img"
 
-font = pygame.font.SysFont("Verdana", 20)
+font = pygame.font.SysFont("Verdana", 30)
 
 main_surface = pygame.display.set_mode(screen)
 
@@ -27,7 +27,7 @@ player = next(player_iter_img_cycle)
 player_rect = player.get_rect()
 player_speed = 5
 
-enemy_img = pygame.image.load("img/enemy.png").convert_alpha()
+enemy_img = pygame.image.load("img/enemy_3.png").convert_alpha()
 bonus_img = pygame.image.load("img/bonus.png").convert_alpha()
 
 
@@ -35,7 +35,7 @@ def create_enemy():
     # enemy_create = pygame.transform.scale(enemy_img, (enemy_img.get_width() / 2, enemy_img.get_height() / 2))
     enemy_create = enemy_img
     enemy_rect = pygame.Rect(width, random.randint(0, height - enemy_img.get_height()), *enemy_create.get_size())
-    enemy_speed = random.randint(2, 5)
+    enemy_speed = random.randint(4, 7)
     return [enemy_create, enemy_rect, enemy_speed]
 
 
@@ -47,7 +47,7 @@ def create_bonus():
     return [bonus_create, bonus_rect, bonus_speed]
 
 
-bg = pygame.transform.scale(pygame.image.load("img/background.png").convert(), screen)
+bg = pygame.transform.scale(pygame.image.load("img/background_2.jpg").convert(), screen)
 bgx = 0
 bgx2 = bg.get_width()
 bg_speed = 3
