@@ -52,9 +52,9 @@ bgx2 = bg.get_width()
 bg_speed = 3
 
 CREATE_ENEMY = pygame.USEREVENT + 1
-pygame.time.set_timer(CREATE_ENEMY, 1500)
+pygame.time.set_timer(CREATE_ENEMY, 2000)
 CREATE_BONUS = pygame.USEREVENT + 2
-pygame.time.set_timer(CREATE_BONUS, 4000)
+pygame.time.set_timer(CREATE_BONUS, 2500)
 # CHANGE_IMG = pygame.USEREVENT + 3
 # pygame.time.set_timer(CHANGE_IMG, 125)
 
