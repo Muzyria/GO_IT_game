@@ -21,9 +21,7 @@ font = pygame.font.SysFont("Verdana", 20)
 
 main_surface = pygame.display.set_mode(screen)
 
-# player_img = [pygame.image.load(f'{IMGS_PATH}/{file}').convert_alpha() for file in listdir(IMGS_PATH)]
-# player_iter_img_cycle = cycle(player_img)
-# player = next(player_iter_img_cycle)
+
 player = pygame.image.load("img/player_2.png").convert_alpha()
 player_rect = player.get_rect()
 player_speed = 5
@@ -56,9 +54,9 @@ bg_speed = 3
 CREATE_ENEMY = pygame.USEREVENT + 1
 pygame.time.set_timer(CREATE_ENEMY, 1500)
 CREATE_BONUS = pygame.USEREVENT + 2
-pygame.time.set_timer(CREATE_BONUS, 2500)
-CHANGE_IMG = pygame.USEREVENT + 3
-pygame.time.set_timer(CHANGE_IMG, 125)
+pygame.time.set_timer(CREATE_BONUS, 3000)
+# CHANGE_IMG = pygame.USEREVENT + 3
+# pygame.time.set_timer(CHANGE_IMG, 125)
 
 img_index = 0
 
