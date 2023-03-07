@@ -47,7 +47,7 @@ def create_bonus():
     return [bonus_create, bonus_rect, bonus_speed]
 
 
-bg = pygame.transform.scale(pygame.image.load("img/background_2.jpg").convert(), screen)
+bg = pygame.transform.scale(pygame.image.load("img/background.jpg").convert(), screen)
 bgx = 0
 bgx2 = bg.get_width()
 bg_speed = 3
